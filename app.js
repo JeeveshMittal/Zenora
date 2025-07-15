@@ -65,10 +65,6 @@ const sessionOptions = {
     }
 };
 
-app.get("/", (req, res) => {
-    res.redirect("/listings");
-});
-
 app.use(session(sessionOptions));
 app.use(flash());
 
@@ -89,6 +85,10 @@ app.use((req, res, next) => {
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
+
+app.get("/", (req, res) => {
+    res.redirect("/listings");
+});
 
 // 404 handler for unmatched routes
 app.use((req, res, next) => { 
